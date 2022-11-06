@@ -1,7 +1,15 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
+  signingConfigs {
+    debug {
+      storeFile file('/Users/dmytrolytvyniuk/i-shop/android/keystore')
+      storePassword '123123'
+      keyAlias 'key0'
+      keyPassword '123123'
+    }
+  }
+  compileSdkVersion rootProject.ext.compileSdkVersion
     defaultConfig {
         applicationId "io.ionic.starter"
         minSdkVersion rootProject.ext.minSdkVersion

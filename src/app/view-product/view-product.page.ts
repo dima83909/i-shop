@@ -11,9 +11,9 @@ import { DataService, Product } from '../services/data.service';
 })
 export class ViewProductPage implements OnInit {
   public product: Product;
-
   public amount!: number;
   public quantity!: number;
+
   constructor(
     private data: DataService,
     private activatedRoute: ActivatedRoute
@@ -24,20 +24,20 @@ export class ViewProductPage implements OnInit {
     this.data.products$.pipe(
       map(products => products.find(product => product.sku === Number(sku)))
     ).subscribe(resp => this.product = resp);
-
   }
 
-  getBackButtonText() {
+  public getBackButtonText(): string {
     const win = window as any;
     const mode = win && win.Ionic && win.Ionic.mode;
     return mode === 'ios' ? 'Products' : '';
   }
 
-  caltulateQuantity(ev?: InputCustomEvent): void {
+  public caltulateQuantity(ev?: InputCustomEvent): void {
     const amount = ev?.target.value ? Number(ev.target.value) : this.amount;
     this.quantity = Math.floor(amount / this.product.price);
   }
-  caltulateAmount(ev?: InputCustomEvent): void {
+
+  public caltulateAmount(ev?: InputCustomEvent): void {
     const quantity = ev?.target.value ? Number(ev.target.value) : this.quantity;
     this.amount = Number((quantity * this.product.price).toFixed(2));
   }

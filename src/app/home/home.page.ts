@@ -15,6 +15,7 @@ export class HomePage implements OnInit {
   public mode!: string;
   public products$: Observable<Product[]>;
   private searchField = new FormControl('');
+  
   constructor(
     private data: DataService,
     private storage: StorageService,
@@ -25,7 +26,6 @@ export class HomePage implements OnInit {
     this.getSearch();
     this.getProducts();
   }
-
 
   async refresh(ev) {
     this.data.getProducts().pipe(first()).subscribe(() => {
@@ -62,7 +62,7 @@ export class HomePage implements OnInit {
     this.mode = await this.storage.get('mode') || 'list';
   }
 
-  setListMode(mode: string): void {
+  public setListMode(mode: string): void {
     if (this.mode === mode) return;
     this.mode = mode;
     this.storage.set('mode', this.mode);

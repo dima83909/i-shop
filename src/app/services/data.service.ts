@@ -28,6 +28,7 @@ export interface Category {
 })
 export class DataService {
   public products$ = new ReplaySubject<Product[]>();
+  
   constructor(
     private httpClient: HttpClient
   ) {
@@ -36,12 +37,8 @@ export class DataService {
 
   public getProducts(): Observable<Product[]> {
     return this.httpClient.get('/assets/data.json').pipe(
-      delay(3000),
+      delay(Math.floor(Math.random() * 7000) + 3000),
       tap((products: Product[]) => this.products$.next(products))
     );
   }
-
-  /* public getProductById(id: number): Product {
-    return this.products[id];
-  } */
 }

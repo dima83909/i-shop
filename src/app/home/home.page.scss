@@ -2,3 +2,22 @@
     text-align: center;
     opacity: 0.7;
 }
+
+ion-menu-toggle {
+    bottom: 50px;
+    right: 20px;
+    ion-button {
+        width: 62px;
+        height: 62px;
+        --border-radius: 50%!important;
+        button {
+            overflow: visible !important;
+        }
+    }
+    ion-badge{
+        position: absolute; 
+        font-size: 10pt;
+        right: 5px;
+        top: 3px; 
+    }
+}

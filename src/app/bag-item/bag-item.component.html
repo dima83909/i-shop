@@ -1,0 +1,16 @@
+<ion-item>
+  <ion-thumbnail slot="start">
+    <img [alt]="bagItem.product.name" [src]="bagItem.product.image" />
+  </ion-thumbnail>
+  <ion-label>
+    <h2>
+      {{ bagItem.product.name }}
+    </h2>
+    <p>
+      {{ bagItem.quantity }} qty
+    </p>
+  </ion-label>
+  <ion-button fill="clear" (click)="removeFromBag()">
+    <ion-icon slot="icon-only" name="close-outline"></ion-icon>
+  </ion-button>
+</ion-item>

@@ -1,3 +1,17 @@
+<ion-menu contentId="main-content" (ionDidClose)="menuClosed()" #bagMenu>
+  <ion-header>
+    <ion-toolbar>
+      <ion-title>Bag</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <ion-content class="ion-padding">
+    <ion-list *ngIf="bag$ | async as bag">
+      <app-bag-item *ngFor="let bagItem of bag; index as i" [bagItem]="bagItem" (removeClicked)="removeFromBag(i)"></app-bag-item>
+      <h3 *ngIf="bag.length === 0" class="empty">Bag list is empty</h3>
+    </ion-list>
+  </ion-content>
+</ion-menu>
+
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
@@ -18,13 +32,12 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content [fullscreen]="true">
+<ion-content [fullscreen]="true" id="main-content">
   <ion-refresher slot="fixed" (ionRefresh)="refresh($event)">
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
   <ng-container *ngIf="products$ | async as products">
-
     <ion-list *ngIf="mode === 'list'">
       <app-product *ngFor="let product of products" [product]="product" [mode]="mode"></app-product>
       <h3 *ngIf="products.length === 0" class="empty">Products list is empty</h3>
@@ -39,4 +52,11 @@
     </ion-grid>
 
   </ng-container>
+  
+  <ion-menu-toggle slot="fixed">
+    <ion-button>
+      <ion-icon slot="icon-only" name="basket-outline"></ion-icon>
+    </ion-button>
+    <ion-badge *ngIf="bag$ | async as bag" color="secondary">{{bag.length}}</ion-badge>
+  </ion-menu-toggle>
 </ion-content>

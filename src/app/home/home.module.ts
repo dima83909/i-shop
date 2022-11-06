@@ -6,6 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HomePage } from './home.page';
 import { HomePageRoutingModule } from './home-routing.module';
 import { ProductComponentModule } from '../product/product.module';
+import { BagItemComponentModule } from '../bag-item/bag-item.module';
 
 @NgModule({
   imports: [
@@ -13,6 +14,7 @@ import { ProductComponentModule } from '../product/product.module';
     FormsModule,
     IonicModule,
     ProductComponentModule,
+    BagItemComponentModule,
     HomePageRoutingModule,
     ReactiveFormsModule,
   ],

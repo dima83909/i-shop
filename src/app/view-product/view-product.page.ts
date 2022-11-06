@@ -1,7 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { InputCustomEvent } from '@ionic/core';
 import { map } from 'rxjs/operators';
+import { BagService } from '../services/bag.service';
 import { DataService, Product } from '../services/data.service';
 
 @Component({
@@ -16,7 +18,10 @@ export class ViewProductPage implements OnInit {
 
   constructor(
     private data: DataService,
-    private activatedRoute: ActivatedRoute
+    private bag: BagService,
+    private toastController: ToastController,
+    private activatedRoute: ActivatedRoute,
+    private router: Router,
   ) { }
 
   ngOnInit() {
@@ -40,5 +45,27 @@ export class ViewProductPage implements OnInit {
   public caltulateAmount(ev?: InputCustomEvent): void {
     const quantity = ev?.target.value ? Number(ev.target.value) : this.quantity;
     this.amount = Number((quantity * this.product.price).toFixed(2));
+  }
+
+  async addToBag(): Promise<void> {
+    this.bag.addItem({
+      product: this.product,
+      quantity: this.quantity
+    });
+    delete this.amount;
+    delete this.quantity;
+    const toast = await this.toastController.create({
+      message: 'Product added to bag',
+      duration: 1500,
+      position: 'bottom',
+      buttons: [
+        {
+          text: 'Go to Bag',
+          role: 'info',
+          handler: () => { this.router.navigate(['/'], { queryParams: { menu: true } }) }
+        },
+      ]
+    });
+    await toast.present();
   }
 }

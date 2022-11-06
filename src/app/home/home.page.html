@@ -1,8 +1,20 @@
 <ion-header [translucent]="true">
   <ion-toolbar>
     <ion-title>
-      Inbox
+      Products
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="setListMode('grid')">
+        <ion-icon slot="icon-only" name="grid-outline"></ion-icon>
+      </ion-button>
+      <ion-button (click)="setListMode('list')">
+        <ion-icon slot="icon-only" name="list-outline"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar type="search" [formControl]="searchField" debounce="100"></ion-searchbar>
+    <ion-progress-bar type="indeterminate" *ngIf="!(products$ | async)"></ion-progress-bar>
   </ion-toolbar>
 </ion-header>
 
@@ -11,15 +23,20 @@
     <ion-refresher-content></ion-refresher-content>
   </ion-refresher>
   
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">
-        Inbox
-      </ion-title>
-    </ion-toolbar>
-  </ion-header>
-  
-  <ion-list>
-    <app-message *ngFor="let message of getMessages()" [message]="message"></app-message>
-  </ion-list>
+  <ng-container *ngIf="products$ | async as products">
+
+    <ion-list *ngIf="mode === 'list'">
+      <app-product *ngFor="let product of products" [product]="product" [mode]="mode"></app-product>
+      <h3 *ngIf="products.length === 0" class="empty">Products list is empty</h3>
+    </ion-list>
+
+    <ion-grid *ngIf="mode === 'grid'">
+      <ion-row>
+        <ion-col *ngFor="let product of products" size="6" class="ion-no-padding">
+          <app-product [product]="product" [mode]="mode"></app-product>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+
+  </ng-container>
 </ion-content>

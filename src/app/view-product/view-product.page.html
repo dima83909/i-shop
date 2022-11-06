@@ -1,0 +1,44 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button [text]="getBackButtonText()" defaultHref="/"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      Product
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [fullscreen]="true" *ngIf="product">
+  <img [alt]="product.name" [src]="product.image" />
+  <ion-item>
+    <ion-label class="ion-text-wrap">
+      <h2>
+        {{ product.name }}
+      </h2>
+    </ion-label>
+    <ion-note class="ion-no-padding" slot="end">
+      ${{ product.price }}
+    </ion-note>
+  </ion-item>
+  
+  <div class="ion-padding">
+    <p>
+      {{ product.description }}
+    </p>
+  </div>
+  <ion-grid class="ion-padding">
+    <ion-row>
+      <ion-col class="ion-justify-content-evenly ion-no-padding">
+        <ion-button (click)="amount = 100; caltulateQuantity()">100$</ion-button>
+        <ion-button (click)="amount = 10; caltulateQuantity()">10$</ion-button>
+        <ion-input type="number" inputmode="decimal" placeholder="Amount, $" [(ngModel)]="amount" (ionInput)="caltulateQuantity($event)"></ion-input>
+      </ion-col>
+      <ion-col class="ion-justify-content-evenly ion-no-padding">
+        <ion-button (click)="quantity = 20; caltulateAmount()">20 qty</ion-button>
+        <ion-button (click)="quantity = 2; caltulateAmount()">2 qty</ion-button>
+        <ion-input type="number" inputmode="numeric" placeholder="Quantity" [(ngModel)]="quantity" (ionInput)="caltulateAmount($event)"></ion-input>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>

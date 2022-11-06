@@ -1,0 +1,44 @@
+ion-label {
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+
+ion-item h2 {
+  font-weight: 600;
+  margin: 0;
+}
+
+ion-item p {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 95%;
+}
+
+ion-item ion-note {
+  font-size: 15px;
+  margin: 12px 8px;
+  font-weight: normal;
+}
+
+ion-card-title {
+  font-size: 3.5vw;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  @media screen and (min-width: 576px) {
+      font-size: 16px;
+  }
+}
+
+ion-card-content {
+  font-size: 3vw;
+  line-height: 40px;
+  max-height: 40px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  @media screen and (min-width: 576px) {
+    font-size: 14px;
+}
+}

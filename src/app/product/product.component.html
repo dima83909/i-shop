@@ -1,0 +1,29 @@
+<ng-container *ngIf="product">
+  <ion-item *ngIf="mode === 'list'" [routerLink]="'/product/' + product.sku" [detail]="false">
+    <ion-avatar slot="start">
+      <img [alt]="product.name" [src]="product.image" />
+    </ion-avatar>
+    <ion-label class="ion-text-wrap">
+      <h2>
+        {{ product.name }}
+      </h2>
+      <p>
+        {{ product.description }}
+      </p>
+    </ion-label>
+    <ion-note>
+      ${{ product.price }}
+    </ion-note>
+  </ion-item>
+  <ion-card *ngIf="mode === 'grid'" [routerLink]="'/product/' + product.sku">
+    <img [alt]="product.name" [src]="product.image" />
+    <ion-card-header>
+      <ion-card-title>{{ product.name }}</ion-card-title>
+      <ion-card-subtitle>${{ product.price }}</ion-card-subtitle>
+    </ion-card-header>
+
+    <ion-card-content>
+      {{ product.description }}
+    </ion-card-content>
+  </ion-card>
+</ng-container>
